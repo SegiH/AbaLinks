@@ -1,0 +1,5 @@
+.AbaLinksTable {
+    position: absolute;
+    overflow: auto;
+    min-width: 1000px;
+}

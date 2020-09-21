@@ -1,0 +1,9 @@
+{
+    "/" : {
+      "target": "https://abalinks.hovav.org",
+      "secure": false,
+      "logLevel": "debug",
+      "pathRewrite": {"^/" : ""},
+      "changeOrigin": true
+    }
+  }
