@@ -3,3 +3,13 @@
     overflow: auto;
     min-width: 1000px;
 }
+
+table tr td:first-child  {
+    min-width: 80px;
+    white-space: wrap;
+}
+
+table tr td:nth-child(4)  {
+    min-width: 180px;
+    white-space: wrap;
+}

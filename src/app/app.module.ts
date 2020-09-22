@@ -3,6 +3,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
 /*
@@ -30,6 +32,8 @@ import { CoreModule } from './core/core.module';
     CoreModule,
     FormsModule,
     MatButtonModule,
+    MatSelectModule,
+    MatSortModule,
     MatTableModule
   ],
   providers: [],

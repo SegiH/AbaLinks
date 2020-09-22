@@ -20,7 +20,7 @@
                     <textarea cdkTextareaAutosize
                          #autosize="cdkTextareaAutosize"
                          cdkAutosizeMinRows="1"
-                         cdkAutosizeMaxRows="5"matInput name="edit" (placeholder)="Edit" type="text" value="{{element.Name}}" [(ngModel)]="element.Name">
+                         cdkAutosizeMaxRows="5"matInput name="Name" (placeholder)="Name" type="text" value="{{element.Name}}" [(ngModel)]="element.Name">
                     </textarea>
                </mat-form-field>
           </td>
@@ -39,7 +39,8 @@
                   <textarea cdkTextareaAutosize
                        #autosize="cdkTextareaAutosize"
                        cdkAutosizeMinRows="1"
-                       cdkAutosizeMaxRows="5"matInput name="edit" (placeholder)="Edit" type="text" value="{{element.URL}}" [(ngModel)]="element.URL">
+                       cdkAutosizeMaxRows="5"
+                       matInput name="URL" (placeholder)="URL" type="text" value="{{element.URL}}" [(ngModel)]="element.URL">
                   </textarea>
              </mat-form-field>
         </td>
@@ -53,19 +54,14 @@
                <div *ngIf="!isBeingEdited">    
                     {{element.Type}}
                </div>
-
-               <!--<mat-form-field *ngIf="isBeingEdited">
-                    <textarea cdkTextareaAutosize
-                         #autosize="cdkTextareaAutosize"
-                         cdkAutosizeMinRows="1"
-                         cdkAutosizeMaxRows="5"matInput name="edit" (placeholder)="Edit" type="text" value="{{element.URL}}" [(ngModel)]="element.URL">
-                    </textarea>
-               </mat-form-field>-->
-          </td>
+               
+               <mat-select  *ngIf="isBeingEdited" name="Type" [(value)]="element.Type">
+                    <mat-option *ngFor="let currType of this.AbaLinksTypes" [value]="currType.value">
+                              {{ currType.value }}
+                    </mat-option>
+               </mat-select>
      </ng-container>
     
-    
-
      <tr mat-header-row *matHeaderRowDef="AbaLinksColumns"></tr>
      <tr mat-row *matRowDef="let row; columns:  AbaLinksColumns;"></tr>
 </table>

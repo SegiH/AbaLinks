@@ -3,5 +3,5 @@ export interface IAbaLink {
      Name: string;
      URL: string;
      Type: string;
-     Duration: string;
+     IsModified: boolean;
 }
