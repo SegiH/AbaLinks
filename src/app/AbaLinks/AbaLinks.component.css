@@ -1,15 +1,47 @@
 .AbaLinksTable {
-    position: absolute;
-    overflow: auto;
-    min-width: 1000px;
+     min-width: 1000px;
+     overflow: auto;
+     position: absolute;
 }
 
+/* Edit column */
 table tr td:first-child  {
-    min-width: 80px;
+     min-width: 80px;
+     white-space: wrap;
+}
+
+/* Name column */
+table tr td:nth-child(3) mat-form-field {
+     min-width: 225px;
+     font-weight: bold;
+     color: black !important;
+     white-space: wrap;
+}
+
+/* Name column edit */
+table tr td:nth-child(3) mat-form-field input {
+     font-weight: bold;
+     color: black !important;
+}
+
+/* URL column */
+table tr td:nth-child(4)  {
+     min-width: 200px;
+     white-space: wrap;
+}
+
+/* URL column edit field */
+table tr td:nth-child(4) mat-form-field {     
+     min-width: 450px;
+     white-space: wrap;
+}
+
+/* Type column */
+table tr td:nth-child(5)  {
+    min-width: 100px;
     white-space: wrap;
 }
 
-table tr td:nth-child(4)  {
-    min-width: 180px;
-    white-space: wrap;
+mat-grid-list {
+     max-width: 800px;
 }

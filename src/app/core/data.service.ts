@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { IAbaLink } from '../core/interfaces';
 import { throwError } from 'rxjs/';
 import { catchError} from 'rxjs/operators';
 
@@ -32,5 +32,13 @@ export class DataService {
           }
 
           return throwError(error || 'Node.js server error');
+     }
+
+     updateLink(ID: number, columnName: string, columnValue: any) {
+          //  fetch('/LinkData.php?task=updateRow&rowID=' + rowID + '&columnName=' + columnName + '&columnValue=' + encodeURIComponent(columnValue), {method: 'GET',dataType:'json'}).then(response => response.json()).then((response) =>
+          return this.http.get<any>('LinkData.php?task=updateRow&rowID=' + ID + '&columnName=' + columnName + '&columnValue=' + encodeURIComponent(columnValue))
+          .pipe(
+               catchError(this.handleError)
+          );
      }
 }
