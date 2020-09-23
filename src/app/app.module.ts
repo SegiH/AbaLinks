@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
@@ -12,13 +13,15 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 
 import { AbaLinksComponent } from './AbaLinks/AbaLinks.component';
 import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
-    AbaLinksComponent
+    AbaLinksComponent,
+    ModalDialogComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -27,6 +30,7 @@ import { CoreModule } from './core/core.module';
     FormsModule,
     MatButtonModule,
     MatCardModule,
+    MatDialogModule,
     MatGridListModule,
     MatIconModule,
     MatInputModule,

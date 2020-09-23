@@ -45,3 +45,7 @@ table tr td:nth-child(5)  {
 mat-grid-list {
      max-width: 800px;
 }
+
+#cancelButton {
+     margin-left: 25px;
+}

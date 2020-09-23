@@ -1,0 +1,8 @@
+#OKButton {
+    float: left;
+}
+
+#CancelButton {
+    float:right;
+    margin-left: 60%;
+}

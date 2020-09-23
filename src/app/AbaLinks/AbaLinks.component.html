@@ -9,18 +9,18 @@
           <mat-grid-list cols="4" rowHeight="30px">
                <mat-grid-tile [colspan]=1 [rowspan]=1>
                     <mat-form-field>
-                         <input matInput placeholder="Name">
+                         <input matInput placeholder="Name" [(ngModel)]="addName">
                     </mat-form-field>
                </mat-grid-tile>
 
                <mat-grid-tile [colspan]=1 [rowspan]=1>
                     <mat-form-field>
-                         <input matInput placeholder="URL">
+                         <input matInput placeholder="URL" [(ngModel)]="addURL">
                     </mat-form-field>
                </mat-grid-tile>
 
                <mat-grid-tile [colspan]=1 [rowspan]=1>
-                    <mat-select name="Add Type" placeholder="Add Type">
+                    <mat-select name="Add Type" placeholder="Add Type" [(value)]="addType">
                          <ng-container *ngFor="let currType of this.AbaLinksTypes">
                               <mat-option  *ngIf="currType.value != 'All'" [value]="currType.id">
                                    {{ currType.value }}
@@ -30,14 +30,14 @@
                </mat-grid-tile>
 
                <mat-grid-tile [colspan]=1 [rowspan]=1>
-                    <button matInput mat-raised-button color="primary" (click)="addClick()" >Add</button>
-                    <button matInput mat-raised-button color="warn">Cancel</button>
+                    <button matInput mat-raised-button color="primary" (click)="addNewLinkClick(true)">Add</button>
+                    <button id="cancelButton" matInput mat-raised-button color="warn" (click)="addNewLinkClick(false)">Cancel</button>
                </mat-grid-tile>            
           </mat-grid-list>         
      </mat-card-content>
 </mat-card>
 
-<button *ngIf="!isAdding" matInput mat-raised-button color="warn" (click)="addClick()" >Add Link</button>
+<button *ngIf="!isAdding" matInput mat-raised-button color="warn" (click)="addLinkButtonClick()" >Add Link</button>
 <table mat-table matSort [dataSource]="AbaLinksDataSource" class="AbaLinksTable mat-elevation-z8">
      <!--Edit Column -->
      <ng-container matColumnDef="Edit">
@@ -45,6 +45,7 @@
           <td mat-cell *matCellDef="let element">
                <a href="#"><img [src]="getEditImage(element.IsBeingEdited)" (click)="editClicked(element,true)"></a>
                <a *ngIf="element.IsBeingEdited" href="#"><img src="../assets/cancel.png" (click)="editClicked(element)"></a>
+               <a *ngIf="element.IsBeingEdited" href="#"><img src="../assets/delete.png" (click)="deleteLinkRowClick(element)"></a>
           </td>
      </ng-container>
 
