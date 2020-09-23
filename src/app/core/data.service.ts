@@ -6,9 +6,16 @@ import { catchError} from 'rxjs/operators';
 
 @Injectable()
 export class DataService {
-    readonly showDialogEmitter = new EventEmitter<{message: string}>();
+     readonly showDialogEmitter = new EventEmitter<{message: string}>();
 
-    constructor(private http: HttpClient) { }
+     constructor(private http: HttpClient) { }
+
+     deleteLink(ID: number) {
+          return this.http.get<any>('LinkData.php?task=deleteRow&LinkID=' + ID)
+          .pipe(
+               catchError(this.handleError)
+          );
+     }
 
      getLinks() {
           return this.http.get<any>('LinkData.php?task=fetchData')

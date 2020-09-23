@@ -2,6 +2,35 @@
      <span>AbaLinks</span>
 </mat-toolbar>
 
+
+<mat-card id="searchPanel">
+     <mat-card-title>Search panel</mat-card-title>
+
+     <mat-card-content>
+          <mat-grid-list cols="4" rowHeight="30px">
+               <mat-grid-tile [colspan]=1 [rowspan]=1>
+                    <mat-form-field>
+                         <input matInput placeholder="Name" [(ngModel)]="searchName" (keydown)="applyFilter(searchName)">
+                    </mat-form-field>
+               </mat-grid-tile>
+
+               <mat-grid-tile [colspan]=1 [rowspan]=1>
+                    <mat-form-field>
+                         <input matInput placeholder="URL" [(ngModel)]="searchURL" (keydown)="applyFilter(searchURL)">
+                    </mat-form-field>
+               </mat-grid-tile>
+
+               <mat-grid-tile [colspan]=1 [rowspan]=1>
+                    <mat-select name="Search Type" placeholder="Search Type" [(value)]="searchType" (selectionChange)="applyFilter(searchType.toString())">
+                         <mat-option *ngFor="let currType of this.AbaLinksTypes" [value]="currType.id">
+                              {{ currType.value }}
+                         </mat-option>
+                    </mat-select>
+               </mat-grid-tile>         
+          </mat-grid-list>         
+     </mat-card-content>
+</mat-card>
+
 <mat-card *ngIf="isAdding">
      <mat-card-title>Add Link</mat-card-title>
      
