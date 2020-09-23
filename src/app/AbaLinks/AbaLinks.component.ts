@@ -1,13 +1,3 @@
-// DONE - Add saving to server
-// DONE - add ability to cancel instead of save
-// DONE - add validation before saving - all 3 fields are required
-// DONE - Don't allow user to select All as a type. Its only used for searching
-// DONE - after editing/adding new row, fetch data
-// DONE - add add panel
-// DONE - add ability to delete row
-// DONE - add confirmation before deleting
-// DONE - add search panel
-
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
