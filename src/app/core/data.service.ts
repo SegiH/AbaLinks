@@ -1,6 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IAbaLink } from '../core/interfaces';
 import { throwError } from 'rxjs/';
 import { catchError} from 'rxjs/operators';
 

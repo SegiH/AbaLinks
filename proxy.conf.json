@@ -1,6 +1,6 @@
 {
     "/" : {
-      "target": "https://abalinks.hovav.org",
+      "target": "https://mylinks.hovav.org",
       "secure": false,
       "logLevel": "debug",
       "pathRewrite": {"^/" : ""},

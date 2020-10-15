@@ -3,24 +3,24 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { ModalDialogComponent } from '../modal-dialog/modal-dialog.component';
-import { IAbaLink } from '../core/interfaces';
+import { IMyLink } from '../core/interfaces';
 import { DataService } from '../core/data.service';
 import { throwError } from 'rxjs/';
 
 @Component({
-     selector: 'app-abalinks',
-     templateUrl: './AbaLinks.component.html',
-     styleUrls: ['./AbaLinks.component.css']
+     selector: 'app-mylinks',
+     templateUrl: './MyLinks.component.html',
+     styleUrls: ['./MyLinks.component.css']
 })
 
-export class AbaLinksComponent {
+export class MyLinksComponent {
      addName: string;
      addURL: string;
      addType: number;
-     AbaLinksColumns: string[] = ['Edit','ID','Name','URL','Type'];     
-     AbaLinksPayload: IAbaLink[];
-     AbaLinksDataSource: MatTableDataSource<any>;
-     AbaLinksTypes: any = null;
+     MyLinksColumns: string[] = ['Edit','ID','Name','URL','Type'];     
+     MyLinksPayload: IMyLink[];
+     MyLinksDataSource: MatTableDataSource<any>;
+     MyLinksTypes: any = null;
      currentlyBeingEditedID : number = 0;
      deleteResponse: string;
      dialogRef: any;
@@ -28,8 +28,17 @@ export class AbaLinksComponent {
      searchName: string;
      searchURL: string
      searchType: number;
+     title: string
      
-     constructor(private dataService: DataService,public snackBar: MatSnackBar,public dialog: MatDialog) {
+     constructor(private dataService: DataService,public snackBar: MatSnackBar,public dialog: MatDialog) {          
+          if (window.location.href.indexOf("ema") != -1) {
+               this.title="Ema Links"
+          } else if (window.location.href.indexOf("aba") != -1) {
+               this.title="Aba Links"
+          } else {
+               this.title="Aba Links"
+          }    
+
           this.dataService.showDialogEmitter.subscribe(messageData => {
                const message=messageData.message;
                
@@ -44,9 +53,9 @@ export class AbaLinksComponent {
 
      ngOnInit() {
           // Use this for offline debugging
-          //this.AbaLinksTypes=  {6 : "All",4 : "Document",5 : "Jokes",2 : "Song",1 : "Video",3 : "Website"};
-          //this.AbaLinksPayload=[{ ID : 5, Name : "First Look at Yemenite Jews", URL: "https:\\\\www.haaretz.com\\israel-news\\MAGAZINE-first-ever-photos-of-yemen-s-jews-s",Type : "Website", Duration: "0:35"},{ ID : 5, Name : "First Look at Yemenite Jews", URL: "https:\\\\www.haaretz.com\\israel-news\\MAGAZINE-first-ever-photos-of-yemen-s-jews-s",Type : "Website", Duration: "0:35"}];
-          //this.AbaLinksDataSource=new MatTableDataSource(this.AbaLinksPayload);
+          //this.MyLinksTypes=  {6 : "All",4 : "Document",5 : "Jokes",2 : "Song",1 : "Video",3 : "Website"};
+          //this.MyLinksPayload=[{ ID : 5, Name : "First Look at Yemenite Jews", URL: "https:\\\\www.haaretz.com\\israel-news\\MAGAZINE-first-ever-photos-of-yemen-s-jews-s",Type : "Website", Duration: "0:35"},{ ID : 5, Name : "First Look at Yemenite Jews", URL: "https:\\\\www.haaretz.com\\israel-news\\MAGAZINE-first-ever-photos-of-yemen-s-jews-s",Type : "Website", Duration: "0:35"}];
+          //this.MyLinksDataSource=new MatTableDataSource(this.MyLinksPayload);
 
           this.getLinks();
      }
@@ -54,7 +63,7 @@ export class AbaLinksComponent {
      // Event when the user clicks on the button to add a new link
      addLinkButtonClick() {
           // Do not allow the user to add a new item if they are already editing an item
-          const editcount=this.AbaLinksPayload.reduce((a,c) => {if(c.IsBeingEdited) { a++ }; return a}, 0)
+          const editcount=this.MyLinksPayload.reduce((a,c) => {if(c.IsBeingEdited) { a++ }; return a}, 0)
           
           if (editcount != 0) {
                this.showSnackBarMessage("You cannot add a new link while editing another link. Save the other link first");
@@ -111,7 +120,7 @@ export class AbaLinksComponent {
      }
 
      applyFilter(filterValue: string) {
-          this.AbaLinksDataSource.filter = filterValue;
+          this.MyLinksDataSource.filter = filterValue;
 
           this.createLinkFilter()
      }
@@ -149,7 +158,7 @@ export class AbaLinksComponent {
                if (result.response == false) 
                     return;
 
-               const item=this.AbaLinksPayload.find(Item => Item.ID === element.ID);
+               const item=this.MyLinksPayload.find(Item => Item.ID === element.ID);
 
                this.dataService.deleteLink(item.ID)
                     .subscribe((response: any[]) => {    
@@ -164,7 +173,7 @@ export class AbaLinksComponent {
 
      editClicked(element,editclicked) {
           // Only allow editing of 1 item at a time
-          const editcount=this.AbaLinksPayload.reduce((a,c) => {if(c.IsBeingEdited) { a++ }; return a}, 0)
+          const editcount=this.MyLinksPayload.reduce((a,c) => {if(c.IsBeingEdited) { a++ }; return a}, 0)
           
           if (editcount > 0 && element.ID != this.currentlyBeingEditedID) {
                this.showSnackBarMessage("You cannot edit a link while editing another link");
@@ -174,7 +183,7 @@ export class AbaLinksComponent {
                return;
           }
 
-          const item=this.AbaLinksPayload.find(Item => Item.ID === element.ID);
+          const item=this.MyLinksPayload.find(Item => Item.ID === element.ID);
           
           if (editclicked) { // Edit button was clicked
                if (!item.IsModified) { // button was clicked when the button text is Edit
@@ -231,7 +240,7 @@ export class AbaLinksComponent {
      }
 
      fieldChanged(element) {
-          const item=this.AbaLinksPayload.find(Item => Item.ID === element.ID);
+          const item=this.MyLinksPayload.find(Item => Item.ID === element.ID);
 
           item.IsModified=true;
      }
@@ -245,16 +254,16 @@ export class AbaLinksComponent {
      getLinks() {
           this.dataService.getTypes()
           .subscribe((types: any[]) => {
-               this.AbaLinksTypes = types;
+               this.MyLinksTypes = types;
 
                this.dataService.getLinks()
                .subscribe((links: any[]) => {
-                    this.AbaLinksPayload = links;
+                    this.MyLinksPayload = links;
 
-                    this.AbaLinksDataSource=new MatTableDataSource(this.AbaLinksPayload);
+                    this.MyLinksDataSource=new MatTableDataSource(this.MyLinksPayload);
 
                     // Assign custom filter function
-                    this.AbaLinksDataSource.filterPredicate = this.createLinkFilter();
+                    this.MyLinksDataSource.filterPredicate = this.createLinkFilter();
                },
                error => {
                     throwError("An error occurred getting the links");

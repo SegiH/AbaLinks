@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-     <span>AbaLinks</span>
+     <span>{{title}}</span>
 </mat-toolbar>
 
 
@@ -22,7 +22,7 @@
 
                <mat-grid-tile [colspan]=1 [rowspan]=1>
                     <mat-select name="Search Type" placeholder="Search Type" [(value)]="searchType" (selectionChange)="applyFilter(searchType.toString())">
-                         <mat-option *ngFor="let currType of this.AbaLinksTypes" [value]="currType.id">
+                         <mat-option *ngFor="let currType of this.MyLinksTypes" [value]="currType.id">
                               {{ currType.value }}
                          </mat-option>
                     </mat-select>
@@ -50,7 +50,7 @@
 
                <mat-grid-tile [colspan]=1 [rowspan]=1>
                     <mat-select name="Add Type" placeholder="Add Type" [(value)]="addType">
-                         <ng-container *ngFor="let currType of this.AbaLinksTypes">
+                         <ng-container *ngFor="let currType of this.MyLinksTypes">
                               <mat-option  *ngIf="currType.value != 'All'" [value]="currType.id">
                                    {{ currType.value }}
                               </mat-option>
@@ -67,7 +67,7 @@
 </mat-card>
 
 <button *ngIf="!isAdding" matInput mat-raised-button color="warn" (click)="addLinkButtonClick()" >Add Link</button>
-<table mat-table matSort [dataSource]="AbaLinksDataSource" class="AbaLinksTable mat-elevation-z8">
+<table mat-table matSort [dataSource]="MyLinksDataSource" class="MyLinksTable mat-elevation-z8">
      <!--Edit Column -->
      <ng-container matColumnDef="Edit">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit </th>
@@ -118,7 +118,7 @@
       
           <td mat-cell *matCellDef="let element">
                <mat-select [disabled]="!element.IsBeingEdited" name="Type" placeholder="Type" [(value)]="element.TypeID" (selectionChange)="fieldChanged(element)">
-                    <ng-container *ngFor="let currType of this.AbaLinksTypes">
+                    <ng-container *ngFor="let currType of this.MyLinksTypes">
                          <mat-option  *ngIf="currType.value != 'All'" [value]="currType.id">
                               {{ currType.value }}
                          </mat-option>
@@ -127,6 +127,6 @@
           </td>
      </ng-container>
     
-     <tr mat-header-row *matHeaderRowDef="AbaLinksColumns"></tr>
-     <tr mat-row *matRowDef="let row; columns:  AbaLinksColumns;"></tr>
+     <tr mat-header-row *matHeaderRowDef="MyLinksColumns"></tr>
+     <tr mat-row *matRowDef="let row; columns:  MyLinksColumns;"></tr>
 </table>

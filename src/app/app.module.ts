@@ -15,12 +15,12 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 
-import { AbaLinksComponent } from './AbaLinks/AbaLinks.component';
+import { MyLinksComponent } from './MyLinks/MyLinks.component';
 import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
-    AbaLinksComponent,
+    MyLinksComponent,
     ModalDialogComponent
   ],
   imports: [
@@ -41,6 +41,6 @@ import { CoreModule } from './core/core.module';
     MatToolbarModule
   ],
   providers: [],
-  bootstrap: [AbaLinksComponent]
+  bootstrap: [MyLinksComponent]
 })
 export class AppModule { }
