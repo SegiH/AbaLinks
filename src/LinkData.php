@@ -4,7 +4,7 @@ $results = array();
 
 // Change this to your own Mysql Login info
 $database_username="abalinks";
-$database_password="xsX3~n#HPdN~Z33";
+$database_password="";
 $database_host="AbaLinks-DB";
 $database_name="abalinks";
 $table_name="abalinks";
