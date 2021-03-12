@@ -16,6 +16,13 @@ export class DataService {
           );
      }
 
+     getInstanceName() {
+          return this.http.get<any>('https://mylinks-instances.hovav.org/?task=getInstanceName&InstanceURL=https://segilinks.hovav.org')
+          .pipe(
+               catchError(this.handleError)
+          );     
+     }
+
      getLinks() {
           return this.http.get<any>('LinkData.php?task=fetchData')
           .pipe(

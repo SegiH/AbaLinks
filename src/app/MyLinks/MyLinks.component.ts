@@ -31,14 +31,13 @@ export class MyLinksComponent {
      title: string
      
      constructor(private dataService: DataService,public snackBar: MatSnackBar,public dialog: MatDialog) {          
-          if (window.location.href.indexOf("ema") != -1) {
+          /*if (window.location.href.indexOf("ema") != -1) {
                this.title="Ema Links"
           } else if (window.location.href.indexOf("aba") != -1) {
                this.title="Aba Links"
           } else {
                this.title="Aba Links"
-          }    
-
+          }*/
           this.dataService.showDialogEmitter.subscribe(messageData => {
                const message=messageData.message;
                
@@ -56,6 +55,16 @@ export class MyLinksComponent {
           //this.MyLinksTypes=  {6 : "All",4 : "Document",5 : "Jokes",2 : "Song",1 : "Video",3 : "Website"};
           //this.MyLinksPayload=[{ ID : 5, Name : "First Look at Yemenite Jews", URL: "https:\\\\www.haaretz.com\\israel-news\\MAGAZINE-first-ever-photos-of-yemen-s-jews-s",Type : "Website", Duration: "0:35"},{ ID : 5, Name : "First Look at Yemenite Jews", URL: "https:\\\\www.haaretz.com\\israel-news\\MAGAZINE-first-ever-photos-of-yemen-s-jews-s",Type : "Website", Duration: "0:35"}];
           //this.MyLinksDataSource=new MatTableDataSource(this.MyLinksPayload);
+          alert("fuck off!");
+
+          this.dataService.getInstanceName()
+          .subscribe((response: any[]) => {    
+               debugger;
+               alert("done!");
+          },
+          error => {
+               throwError("An error occurred deleting the link");
+          });
 
           this.getLinks();
      }
