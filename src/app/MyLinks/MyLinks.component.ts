@@ -1,3 +1,12 @@
+/* 
+TO DO:
+
+Hide main content and show loading screen while loading data
+make URL column narrower
+test editing
+*/
+
+
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
@@ -7,17 +16,27 @@ import { IMyLink } from '../core/interfaces';
 import { DataService } from '../core/data.service';
 import { throwError } from 'rxjs/';
 
+export interface PeriodicElement {
+     name: string;
+     position: number;
+     weight: number;
+     symbol: string;
+   }
+
 @Component({
      selector: 'app-mylinks',
      templateUrl: './MyLinks.component.html',
-     styleUrls: ['./MyLinks.component.css']
+     styleUrls: ['./MyLinks.component.css','./MyLinksResizeableColumn.scss']
+     //styleUrls: ['./MyLinksResizeableColumn.scss']
 })
 
 export class MyLinksComponent {
      addName: string;
      addURL: string;
      addType: number;
-     MyLinksColumns: string[] = ['Edit','ID','Name','URL','Type'];     
+     MyLinksColumns: string[] = ['Edit','ID','Name','URL','Type'];
+     MyLinksResizeableColumns: boolean[] = [false,false,true,true,true];
+     //MyLinksColumns: string[] = ['Edit','ID','Name'];
      MyLinksPayload: IMyLink[];
      MyLinksDataSource: MatTableDataSource<any>;
      MyLinksTypes: any = null;
@@ -28,16 +47,9 @@ export class MyLinksComponent {
      searchName: string;
      searchURL: string
      searchType: number;
-     title: string
+     title: string     
      
-     constructor(private dataService: DataService,public snackBar: MatSnackBar,public dialog: MatDialog) {          
-          /*if (window.location.href.indexOf("ema") != -1) {
-               this.title="Ema Links"
-          } else if (window.location.href.indexOf("aba") != -1) {
-               this.title="Aba Links"
-          } else {
-               this.title="Aba Links"
-          }*/
+     constructor(private dataService: DataService,public snackBar: MatSnackBar,public dialog: MatDialog) {
           this.dataService.showDialogEmitter.subscribe(messageData => {
                const message=messageData.message;
                
@@ -55,18 +67,19 @@ export class MyLinksComponent {
           //this.MyLinksTypes=  {6 : "All",4 : "Document",5 : "Jokes",2 : "Song",1 : "Video",3 : "Website"};
           //this.MyLinksPayload=[{ ID : 5, Name : "First Look at Yemenite Jews", URL: "https:\\\\www.haaretz.com\\israel-news\\MAGAZINE-first-ever-photos-of-yemen-s-jews-s",Type : "Website", Duration: "0:35"},{ ID : 5, Name : "First Look at Yemenite Jews", URL: "https:\\\\www.haaretz.com\\israel-news\\MAGAZINE-first-ever-photos-of-yemen-s-jews-s",Type : "Website", Duration: "0:35"}];
           //this.MyLinksDataSource=new MatTableDataSource(this.MyLinksPayload);
-          alert("fuck off!");
 
           this.dataService.getInstanceName()
-          .subscribe((response: any[]) => {    
-               debugger;
-               alert("done!");
+          .subscribe((response: any[]) => {  
+               if (response.length > 0)
+                    this.title=response[0].Name;
+               else 
+                    this.title="MyLinks";
+
+               this.getLinks();
           },
           error => {
                throwError("An error occurred deleting the link");
           });
-
-          this.getLinks();
      }
 
      // Event when the user clicks on the button to add a new link
@@ -159,7 +172,7 @@ export class MyLinksComponent {
           return filterFunction;
      }
 
-     deleteLinkRowClick(element) {
+     deleteLinkRowClick(element : any) {
           this.dataService.showDialog("Are you sure that you want to delete this link ?");
 
           // Wait for response
@@ -261,11 +274,11 @@ export class MyLinksComponent {
      }
 
      getLinks() {
-          this.dataService.getTypes()
+          this.dataService.getTypes(this.title)
           .subscribe((types: any[]) => {
                this.MyLinksTypes = types;
 
-               this.dataService.getLinks()
+               this.dataService.getLinks(this.title)
                .subscribe((links: any[]) => {
                     this.MyLinksPayload = links;
 
@@ -288,5 +301,10 @@ export class MyLinksComponent {
           const config = new MatSnackBarConfig();
           config.duration = 3000;
           this.snackBar.open(message, 'OK', config);
+     }
+
+     // Used to prevent the entire DOM tree from being re-rendered every time that there is a change
+     trackByFn(index, item) {
+          return index; // or item.id
      }
 }

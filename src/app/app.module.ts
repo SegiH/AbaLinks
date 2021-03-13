@@ -14,14 +14,18 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
+import { ResizeColumnDirective } from './core/resize-column.directive';
 
 import { MyLinksComponent } from './MyLinks/MyLinks.component';
 import { CoreModule } from './core/core.module';
 
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+
 @NgModule({
   declarations: [
     MyLinksComponent,
-    ModalDialogComponent
+    ModalDialogComponent,
+    ResizeColumnDirective
   ],
   imports: [
     BrowserAnimationsModule,
@@ -40,7 +44,9 @@ import { CoreModule } from './core/core.module';
     MatTableModule,
     MatToolbarModule
   ],
-  providers: [],
+  providers: [
+    //{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+  ],
   bootstrap: [MyLinksComponent]
 })
 export class AppModule { }

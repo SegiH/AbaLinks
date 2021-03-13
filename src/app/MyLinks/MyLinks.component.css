@@ -1,17 +1,22 @@
 .MyLinksTable {
-     min-width: 1000px;
+     /*min-width: 1000px;*/
      overflow: auto;
      position: absolute;
 }
 
 /* Edit column */
-table tr td:first-child  {
-     min-width: 80px;
+.Edit  {
+     width: 70px !important;
      white-space: wrap;
 }
 
+/* ID Column */
+.ID  {
+     width: 70px !important;     
+}
+
 /* Name column */
-table tr td:nth-child(3) mat-form-field {
+.Name {
      min-width: 225px;
      font-weight: bold;
      color: black !important;
@@ -19,25 +24,25 @@ table tr td:nth-child(3) mat-form-field {
 }
 
 /* Name column edit */
-table tr td:nth-child(3) mat-form-field input {
+.Name input {
      font-weight: bold;
      color: black !important;
 }
 
 /* URL column */
-table tr td:nth-child(4)  {
-     min-width: 200px;
+.URL  {
+     /*min-width: 200px;*/
      white-space: wrap;
 }
 
 /* URL column edit field */
-table tr td:nth-child(4) mat-form-field {     
-     min-width: 450px;
+.URL mat-form-field {     
+     max-width: 250px;
      white-space: wrap;
 }
 
 /* Type column */
-table tr td:nth-child(5)  {
+.Type  {
     min-width: 100px;
     white-space: wrap;
 }
@@ -48,4 +53,8 @@ mat-grid-list {
 
 #cancelButton {
      margin-left: 25px;
+}
+
+mat-form-field {
+     display: block !important;
 }

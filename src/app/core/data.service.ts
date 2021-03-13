@@ -23,15 +23,17 @@ export class DataService {
           );     
      }
 
-     getLinks() {
-          return this.http.get<any>('LinkData.php?task=fetchData')
+     getLinks(instance: string) {
+          return this.http.get<any>('LinkData.php?task=fetchData&&InstanceName=' + instance)
           .pipe(
                catchError(this.handleError)
           );
      }
 
-     getTypes() {
-        return this.http.get<any>('LinkData.php?task=fetchTypes')
+     getTypes(instance: string) {
+        const endPoint=(instance == "SegiLinks" ? "LinkData.php?task=fetchSegiTypes" : "LinkData.php?task=fetchTypes");
+
+        return this.http.get<any>(endPoint)
         .pipe(
              catchError(this.handleError)
         );
