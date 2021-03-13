@@ -1,6 +1,6 @@
 {
     "/" : {
-      "target": "https://segilinks.hovav.org",
+      "target": "https://subdomain.example.com",
       "secure": false,
       "logLevel": "debug",
       "pathRewrite": {"^/" : ""},
