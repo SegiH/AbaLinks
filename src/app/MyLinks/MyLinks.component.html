@@ -4,6 +4,7 @@
 
 <div *ngIf="isLoading" class="loader"></div>
 <div *ngIf="isLoading" class="loaderLabel">Loading</div>
+
 <mat-card *ngIf="!isLoading" id="searchPanel">
      <mat-card-title>Search panel</mat-card-title>
 
@@ -71,49 +72,46 @@
 
 
 <table *ngIf="!isLoading" mat-table [dataSource]="MyLinksPayload" class="mat-elevation-z8">
- 
      <ng-container *ngFor="let column of MyLinksColumns; trackBy: trackByFn; let i = index" [matColumnDef]="column">
-       {{column}}
-       <th mat-header-cell *matHeaderCellDef [resizeColumn]="MyLinksResizeableColumns[i]"
-           [index]="i"> <span>{{column}} </span></th>
-       <td mat-cell *matCellDef="let element" [className]="column">
-          <!--Edit Column fields -->
-          <a *ngIf="column=='Edit'" href="#"><img [src]="getEditImage(element.IsBeingEdited)" (click)="editClicked(element,true)"></a>
-          <a *ngIf="column=='Edit' && element.IsBeingEdited" href="#"><img src="../assets/cancel.png" (click)="editClicked(element)"></a>
-          <a *ngIf="column=='Edit' && element.IsBeingEdited" href="#"><img src="../assets/delete.png" (click)="deleteLinkRowClick(element)"></a>
+          {{column}}
+          <th mat-header-cell *matHeaderCellDef [resizeColumn]="MyLinksResizeableColumns[i]" [index]="i"> <span>{{column}} </span></th>
+          <td mat-cell *matCellDef="let element" [className]="column">
+               <!--Edit Column fields -->
+               <a *ngIf="column=='Edit'" href="#"><img [src]="getEditImage(element.IsBeingEdited)" (click)="editClicked(element,true)"></a>
+               <a *ngIf="column=='Edit' && element.IsBeingEdited" href="#"><img src="../assets/cancel.png" (click)="editClicked(element)"></a>
+               <a *ngIf="column=='Edit' && element.IsBeingEdited" href="#"><img src="../assets/delete.png" (click)="deleteLinkRowClick(element)"></a>
           
-          <!-- ID Column fields -->
-          <span *ngIf="column=='ID'" >{{element.ID}}</span>
+               <!-- ID Column fields -->
+               <span *ngIf="column=='ID'" >{{element.ID}}</span>
 
-          <!-- Name Column -->
-          <mat-form-field *ngIf="column=='Name'">
-               <input matInput placeholder="Name" [(ngModel)]="element.Name" (change)="fieldChanged(element)" [disabled]="!element.IsBeingEdited">
-          </mat-form-field>
-          
-          <!-- URL column fields -->
-          <div *ngIf="column=='URL' && !element.IsBeingEdited">
-               <a [href]="element.URL">{{ element.URL }}</a>
-          </div>
-
-          <div *ngIf="column=='URL' && element.IsBeingEdited">
-               <mat-form-field>
-                    <input matInput placeholder="URL" [(ngModel)]="element.URL" (change)="fieldChanged(element)">
+               <!-- Name Column -->
+               <mat-form-field *ngIf="column=='Name'">
+                    <input matInput placeholder="Name" [(ngModel)]="element.Name" (change)="fieldChanged(element)" [disabled]="!element.IsBeingEdited">
                </mat-form-field>
-          </div>
+          
+               <!-- URL column fields -->
+               <div *ngIf="column=='URL' && !element.IsBeingEdited">
+                    <a [href]="element.URL">{{ element.URL }}</a>
+               </div>
 
-          <!-- Type column fields -->
-          <mat-select *ngIf="column=='Type'" [disabled]="!element.IsBeingEdited" name="Type" placeholder="Type" [(value)]="element.TypeID" (selectionChange)="fieldChanged(element)">
-               <ng-container *ngFor="let currType of this.MyLinksTypes">
-                    <mat-option  *ngIf="currType.value != 'All'" [value]="currType.id">
-                         {{ currType.value }}
-                    </mat-option>
-               </ng-container>
-          </mat-select>
-       </td>
-       <td mat-cell *matCellDef="let element"></td>
+               <div *ngIf="column=='URL' && element.IsBeingEdited">
+                    <mat-form-field>
+                         <input matInput placeholder="URL" [(ngModel)]="element.URL" (change)="fieldChanged(element)">
+                    </mat-form-field>
+               </div>
+
+               <!-- Type column fields -->
+               <mat-select *ngIf="column=='Type'" [disabled]="!element.IsBeingEdited" name="Type" placeholder="Type" [(value)]="element.TypeID" (selectionChange)="fieldChanged(element)">
+                    <ng-container *ngFor="let currType of this.MyLinksTypes">
+                         <mat-option  *ngIf="currType.value != 'All'" [value]="currType.id">
+                              {{ currType.value }}
+                         </mat-option>
+                    </ng-container>
+               </mat-select>
+          </td>
+          <td mat-cell *matCellDef="let element"></td>
      </ng-container>
    
      <tr mat-header-row *matHeaderRowDef="MyLinksColumns"></tr>
      <tr mat-row *matRowDef="let row; columns: MyLinksColumns;"></tr>
-   </table>
-   
+</table>

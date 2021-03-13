@@ -1,8 +1,6 @@
 /* 
 TO DO:
 
-Hide main content and show loading screen while loading data
-make URL column narrower
 test editing
 */
 
@@ -296,7 +294,7 @@ export class MyLinksComponent {
           },
           error => {
               this.isLoading=false;
-              
+
               throwError("An error occurred getting the types");
           });
      }

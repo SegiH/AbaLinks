@@ -1,5 +1,4 @@
 .MyLinksTable {
-     /*min-width: 1000px;*/
      overflow: auto;
      position: absolute;
 }
@@ -17,7 +16,7 @@
 
 /* Name column */
 .Name {
-     min-width: 225px;
+     min-width: 425px;
      font-weight: bold;
      color: black !important;
      white-space: wrap;
@@ -31,7 +30,7 @@
 
 /* URL column */
 .URL  {
-     /*min-width: 200px;*/
+     max-width: 800px;
      white-space: wrap;
 }
 
