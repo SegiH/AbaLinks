@@ -27,7 +27,6 @@ export interface PeriodicElement {
      selector: 'app-mylinks',
      templateUrl: './MyLinks.component.html',
      styleUrls: ['./MyLinks.component.css','./MyLinksResizeableColumn.scss']
-     //styleUrls: ['./MyLinksResizeableColumn.scss']
 })
 
 export class MyLinksComponent {
@@ -36,7 +35,6 @@ export class MyLinksComponent {
      addType: number;
      MyLinksColumns: string[] = ['Edit','ID','Name','URL','Type'];
      MyLinksResizeableColumns: boolean[] = [false,false,true,true,true];
-     //MyLinksColumns: string[] = ['Edit','ID','Name'];
      MyLinksPayload: IMyLink[];
      MyLinksDataSource: MatTableDataSource<any>;
      MyLinksTypes: any = null;
@@ -44,6 +42,7 @@ export class MyLinksComponent {
      deleteResponse: string;
      dialogRef: any;
      isAdding: boolean;
+     isLoading: boolean = true;
      searchName: string;
      searchURL: string
      searchType: number;
@@ -286,12 +285,18 @@ export class MyLinksComponent {
 
                     // Assign custom filter function
                     this.MyLinksDataSource.filterPredicate = this.createLinkFilter();
+
+                    this.isLoading=false;
                },
                error => {
+                    this.isLoading=false;
+
                     throwError("An error occurred getting the links");
                });
           },
           error => {
+              this.isLoading=false;
+              
               throwError("An error occurred getting the types");
           });
      }

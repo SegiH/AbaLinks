@@ -2,11 +2,12 @@
      <span>{{title}}</span>
 </mat-toolbar>
 
-
-<mat-card id="searchPanel">
+<div *ngIf="isLoading" class="loader"></div>
+<div *ngIf="isLoading" class="loaderLabel">Loading</div>
+<mat-card *ngIf="!isLoading" id="searchPanel">
      <mat-card-title>Search panel</mat-card-title>
 
-     <mat-card-content>
+     <mat-card-content *ngIf="!isLoading">
           <mat-grid-list cols="4" rowHeight="30px">
                <mat-grid-tile [colspan]=1 [rowspan]=1>
                     <mat-form-field>
@@ -31,7 +32,7 @@
      </mat-card-content>
 </mat-card>
 
-<mat-card *ngIf="isAdding">
+<mat-card *ngIf="isAdding && !isLoading">
      <mat-card-title>Add Link</mat-card-title>
      
      <mat-card-content>
@@ -66,10 +67,10 @@
      </mat-card-content>
 </mat-card>
 
-<button *ngIf="!isAdding" matInput mat-raised-button color="warn" (click)="addLinkButtonClick()" >Add Link</button>
+<button *ngIf="!isAdding && !isLoading" matInput mat-raised-button color="warn" (click)="addLinkButtonClick()" >Add Link</button>
 
 
-<table mat-table [dataSource]="MyLinksPayload" class="mat-elevation-z8">
+<table *ngIf="!isLoading" mat-table [dataSource]="MyLinksPayload" class="mat-elevation-z8">
  
      <ng-container *ngFor="let column of MyLinksColumns; trackBy: trackByFn; let i = index" [matColumnDef]="column">
        {{column}}
