@@ -24,7 +24,7 @@ export class DataService {
      }
 
      getLinks(instance: string) {
-          return this.http.get<any>('LinkData.php?task=fetchData&&InstanceName=' + instance)
+          return this.http.get<any>('LinkData.php?task=fetchData&InstanceName=' + instance)
           .pipe(
                catchError(this.handleError)
           );
